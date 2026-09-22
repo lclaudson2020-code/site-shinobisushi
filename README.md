@@ -53,7 +53,7 @@ Número do WhatsApp: Edite o número de telefone no arquivo script.js e no rodap
 
 Identidade Visual: Altere as variáveis de cores no início do style.css (:root) para adaptar à paleta da sua marca.
 
-Desenvolvido por Claudson Luciano 🥷✨
+Desenvolvido por Claudson Luciano 🥷
 
 
 ---
