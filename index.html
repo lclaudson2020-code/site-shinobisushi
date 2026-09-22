@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shinobi Sushi — Peça pelo WhatsApp</title>
+<meta name="description" content="Cardápio online do Shinobi Sushi. Monte seu pedido e finalize direto pelo WhatsApp.">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍣</text></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Símbolos SVG reutilizáveis (folha de palmeira decorativa) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="palm-frond" viewBox="0 0 160 220">
+      <g fill="currentColor">
+        <path d="M20 220C20 220 10 150 40 95C55 68 78 50 80 20C82 50 60 72 52 100C42 135 40 180 46 220Z"/>
+        <path d="M80 20C80 20 30 40 8 78C22 66 55 56 78 50C60 66 30 82 12 112C34 96 62 82 84 76C64 96 34 118 22 152C46 130 72 114 96 108C78 132 54 158 46 196C70 168 94 148 118 140C102 164 82 190 78 220C98 190 118 164 140 146C128 116 108 88 118 56C126 80 130 106 140 126C142 92 128 60 100 38C104 62 100 86 96 106C92 78 90 48 80 20Z" opacity="0.9"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ===================== HEADER ===================== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#topo" class="brand" id="topo">
+      <img class="brand-logo" src="logo.png" alt="Shinobi Sushi">
+    </a>
+
+    <a class="insta-link" href="https://instagram.com/SHINOBISHUIRB" target="_blank" rel="noopener noreferrer">
+      <svg class="insta-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="2.5" y="2.5" width="19" height="19" rx="5" stroke="currentColor" stroke-width="1.6"/>
+        <circle cx="12" cy="12" r="4.2" stroke="currentColor" stroke-width="1.6"/>
+        <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/>
+      </svg>
+      <span>@SHINOBISHUIRB</span>
+    </a>
+
+    <button class="cart-btn" id="cartToggle" type="button" aria-label="Abrir carrinho">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 8H6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="9.5" cy="20.5" r="1.4" fill="currentColor"/>
+        <circle cx="17.5" cy="20.5" r="1.4" fill="currentColor"/>
+      </svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <svg class="palm palm-left" viewBox="0 0 160 220" aria-hidden="true"><use href="#palm-frond"/></svg>
+  <svg class="palm palm-right" viewBox="0 0 160 220" aria-hidden="true"><use href="#palm-frond"/></svg>
+  <div class="hero-inner">
+    <img class="hero-logo" src="logo.png" alt="Shinobi Sushi">
+    <h1 class="hero-title">Corte a fome.<br><span class="hero-title-accent">Peça no estilo shinobi.</span></h1>
+    <p class="hero-sub">Combos generosos, temakis e adicionais — montados na hora e enviados direto pro seu WhatsApp.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">🛵 Entrega em 20–50 min</span>
+    </div>
+    <a href="#cardapio" class="btn-primary">Ver cardápio</a>
+  </div>
+</section>
+
+<!-- ===================== CARDÁPIO ===================== -->
+<main id="cardapio">
+  <section class="menu-section" id="combos">
+    <h2 class="section-title torn-bar">Combos</h2>
+    <div class="product-grid" id="combosGrid"></div>
+  </section>
+
+  <section class="menu-section" id="adicionais">
+    <h2 class="section-title torn-bar">Adicionais</h2>
+    <div class="product-grid" id="adicionaisGrid"></div>
+  </section>
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="site-footer">
+  <img class="footer-logo" src="logo.png" alt="Shinobi Sushi">
+  <a class="footer-insta" href="https://instagram.com/SHINOBISHUIRB" target="_blank" rel="noopener noreferrer">@SHINOBISHUIRB</a>
+  <a class="footer-phone" href="https://wa.me/5575998956168" target="_blank" rel="noopener noreferrer">(75) 99895-6168</a>
+  <p class="footer-note">Pedidos finalizados via WhatsApp · Entrega em 20–50 min · Retirada no local</p>
+</footer>
+
+<!-- ===================== OVERLAY ===================== -->
+<div class="overlay" id="overlay"></div>
+
+<!-- ===================== CARRINHO ===================== -->
+<aside class="cart-panel" id="cartPanel" aria-hidden="true">
+  <div class="cart-header">
+    <h2>Seu pedido</h2>
+    <button class="cart-close" id="cartClose" type="button" aria-label="Fechar carrinho">&times;</button>
+  </div>
+
+  <div class="cart-body">
+    <div class="cart-items" id="cartItems"></div>
+    <p class="cart-empty" id="cartEmpty">Seu carrinho está vazio. Adicione um combo pra começar. 🍣</p>
+
+    <div class="cart-summary" id="cartSummary">
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="subtotalValue">R$ 0,00</span>
+      </div>
+      <div class="summary-row" id="taxaRow">
+        <span>Taxa de entrega</span>
+        <span id="taxaValue">R$ 0,00</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total</span>
+        <span id="totalValue">R$ 0,00</span>
+      </div>
+      <p class="summary-note" id="tempoEntregaNota">⏱ Tempo estimado de entrega: 20–50 min</p>
+    </div>
+
+    <form class="checkout-form" id="checkoutForm" novalidate>
+      <h3>Finalizar pedido</h3>
+
+      <label class="field">
+        <span class="field-label">Nome completo *</span>
+        <input type="text" id="nomeCliente" name="nomeCliente" placeholder="Seu nome" autocomplete="name">
+      </label>
+
+      <div class="field">
+        <span class="field-label">Entrega *</span>
+        <div class="radio-group" id="tipoEntregaGroup">
+          <label class="radio-option">
+            <input type="radio" name="tipoEntrega" value="entrega" checked>
+            <span>Entrega</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="tipoEntrega" value="retirada">
+            <span>Retirada no local</span>
+          </label>
+        </div>
+      </div>
+
+      <div id="enderecoFields" class="endereco-fields">
+        <label class="field">
+          <span class="field-label">Rua *</span>
+          <input type="text" id="rua" name="rua" placeholder="Nome da rua" autocomplete="address-line1">
+        </label>
+
+        <div class="field-row">
+          <label class="field">
+            <span class="field-label">Número *</span>
+            <input type="text" id="numero" name="numero" placeholder="Nº" inputmode="numeric">
+          </label>
+          <label class="field">
+            <span class="field-label">Bairro *</span>
+            <input type="text" id="bairro" name="bairro" placeholder="Bairro">
+          </label>
+        </div>
+
+        <label class="field">
+          <span class="field-label">Ponto de referência</span>
+          <input type="text" id="referencia" name="referencia" placeholder="Ex: perto do mercado X">
+        </label>
+      </div>
+
+      <label class="field">
+        <span class="field-label">Forma de pagamento *</span>
+        <select id="formaPagamento" name="formaPagamento">
+          <option value="">Selecione...</option>
+          <option value="Pix">Pix</option>
+          <option value="Cartão de Crédito">Cartão de Crédito</option>
+          <option value="Cartão de Débito">Cartão de Débito</option>
+          <option value="Dinheiro">Dinheiro</option>
+        </select>
+      </label>
+
+      <label class="field" id="trocoField" hidden>
+        <span class="field-label">Troco para quanto?</span>
+        <input type="text" id="trocoPara" name="trocoPara" placeholder="Ex: 100,00" inputmode="decimal">
+      </label>
+
+      <label class="field">
+        <span class="field-label">Observações</span>
+        <textarea id="observacoes" name="observacoes" rows="3" placeholder="Ex: sem cebola, tirar gengibre..."></textarea>
+      </label>
+
+      <p class="form-error" id="formError" role="alert"></p>
+
+      <button type="submit" class="btn-whatsapp" id="finalizarBtn">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12.02 2C6.5 2 2.03 6.46 2.03 12c0 1.77.46 3.45 1.34 4.94L2 22l5.2-1.36a9.9 9.9 0 0 0 4.82 1.23h.01c5.52 0 10-4.46 10-9.98C22 6.46 17.53 2 12.02 2Zm5.86 14.27c-.25.7-1.24 1.29-2.02 1.46-.54.11-1.24.2-3.6-.77-3.02-1.25-4.96-4.32-5.11-4.52-.15-.2-1.22-1.62-1.22-3.1s.77-2.2 1.05-2.5c.25-.28.55-.35.73-.35.18 0 .37 0 .53.01.17.01.4-.06.62.48.25.6.84 2.08.91 2.23.07.15.12.33.02.53-.1.2-.15.32-.3.5-.15.18-.31.4-.45.54-.15.15-.3.31-.13.61.17.3.76 1.26 1.63 2.04 1.12 1 2.06 1.32 2.36 1.47.3.15.48.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.67-.15.28.1 1.75.83 2.05.98.3.15.5.23.57.35.08.13.08.73-.17 1.43Z"/>
+        </svg>
+        Finalizar pedido via WhatsApp
+      </button>
+    </form>
+  </div>
+</aside>
+
+<!-- Botão flutuante do carrinho (mobile) -->
+<button class="fab-cart" id="fabCart" type="button" aria-label="Abrir carrinho">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M3 4h2l2.4 12.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 8H6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="9.5" cy="20.5" r="1.4" fill="currentColor"/>
+    <circle cx="17.5" cy="20.5" r="1.4" fill="currentColor"/>
+  </svg>
+  <span>Ver carrinho</span>
+  <span class="fab-count" id="fabCount">0</span>
+</button>
+
+<script src="script.js"></script>
+</body>
+</html>
