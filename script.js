@@ -7,7 +7,7 @@
 const restaurante = {
   nome: 'SHINOBI SUSHI',
   instagram: '@SHINOBISHUIRB',
-  whatsapp: '5575998956168',
+  whatsapp: '5575998956198',
   taxaEntrega: 5.00
 };
 
